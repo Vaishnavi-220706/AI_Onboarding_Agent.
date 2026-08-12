@@ -1,143 +1,237 @@
-AI Employee Onboarding Agent
+# 🤖 AI Employee Onboarding Agent
 
-A local-first Python CLI agent that helps employees answer onboarding questions using approved internal documents only. The project combines retrieval, grounded response generation, security checks, role authorization, and a human-in-the-loop workflow for account-access actions.
+<p align="center">
+  <strong>A Safe, Grounded & Human-Controlled AI Assistant for Employee Onboarding</strong>
+</p>
 
-Project Overview
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white">
+  <img src="https://img.shields.io/badge/AI-Grounded%20Retrieval-7C3AED?style=for-the-badge">
+  <img src="https://img.shields.io/badge/Retrieval-TF--IDF-orange?style=for-the-badge">
+  <img src="https://img.shields.io/badge/Security-Human%20in%20the%20Loop-2EA44F?style=for-the-badge">
+</p>
 
-The AI Employee Onboarding Agent is designed to demonstrate a safe and controlled AI workflow for employee onboarding.
+<p align="center">
+  <em>Answer employee questions from approved company knowledge — without hallucinating policies or performing sensitive actions automatically.</em>
+</p>
 
-Instead of answering from unrestricted external knowledge, the agent retrieves relevant information from a small set of approved company documents and generates responses grounded in those sources.
+---
 
-For requests that require an account-access action, the system does not execute the action immediately. It first checks authorization and requires explicit human approval before calling the mock access tool.
+## 🌟 Overview
 
-Key Features
+The **AI Employee Onboarding Agent** is a local-first intelligent assistant designed to help employees with common onboarding and workplace-support questions.
 
-Local-first Python CLI
+Instead of relying on unrestricted external knowledge, the agent searches a controlled collection of **approved internal documents**, retrieves the most relevant information, and generates a response grounded in that evidence.
 
-Four approved synthetic knowledge documents
+For sensitive requests such as **account access**, the system does not directly perform the action. It follows a controlled workflow involving:
 
-TF-IDF-based document retrieval
+**Authorization → Human Approval → Mock Action**
 
-Cosine-similarity ranking
+This makes the project a practical demonstration of **grounded AI, information retrieval, AI safety, role-based access control, and human-in-the-loop decision making**.
 
-Top-K relevant passage selection
+---
 
-Relevance threshold for safe abstention
+## 💡 Why This Project?
 
-Grounded answers with source citations
+A normal chatbot may confidently answer a question even when it does not actually know the company's policy.
 
-Prompt-injection protection
+This project takes a different approach:
 
-Role-based authorization
+> **If the approved knowledge does not contain enough evidence, the agent should not invent an answer.**
 
-Human approval before account-access actions
+It also follows the principle:
 
-Mock account-access tool
+> **AI can recommend an action, but sensitive actions should remain under human control.**
 
-Tool failure handling
+---
 
-Visible workflow trace
+## ✨ Key Features
 
-Deterministic local response mode
+| Feature                             | Description                                                |
+| ----------------------------------- | ---------------------------------------------------------- |
+| 📚 **Approved Knowledge Base**      | Uses controlled internal onboarding documents              |
+| 🔎 **Smart Retrieval**              | TF-IDF + cosine similarity finds relevant information      |
+| 🎯 **Grounded Responses**           | Answers are based on retrieved evidence                    |
+| 🛑 **Safe Abstention**              | Avoids unsupported answers when evidence is insufficient   |
+| 🛡️ **Prompt-Injection Protection** | Retrieved content cannot override system rules             |
+| 🔐 **Role-Based Authorization**     | Checks user permissions for sensitive actions              |
+| 👤 **Human Approval**               | Requires explicit approval before privileged actions       |
+| 🧰 **Mock Access Tool**             | Demonstrates access workflows without real account changes |
+| 🧾 **Source Citations**             | Shows where the answer came from                           |
+| 🖥️ **Workflow Trace**              | Makes the agent's decision process visible                 |
+| ⚡ **Local-First**                   | Runs locally without requiring an external AI API          |
+| 🦙 **Optional Ollama**              | Supports optional local LLM generation                     |
 
-Optional Ollama response-generation mode
+---
 
-Test suite included in the repository
+## 🏗️ System Architecture
 
-Architecture
+### 📖 Knowledge Question Flow
 
-Knowledge Question Flow
+```text
+┌──────────────────┐
+│   User Question  │
+└────────┬─────────┘
+         ↓
+┌──────────────────┐
+│ Input Validation │
+└────────┬─────────┘
+         ↓
+┌──────────────────────────┐
+│ Security / Injection     │
+│ Detection                │
+└────────┬─────────────────┘
+         ↓
+┌──────────────────┐
+│ Intent Detection │
+└────────┬─────────┘
+         ↓
+┌──────────────────────────┐
+│ Document Retrieval       │
+│ TF-IDF + Cosine Similarity│
+└────────┬─────────────────┘
+         ↓
+┌──────────────────────────┐
+│ Relevance Threshold      │
+└────────┬─────────────────┘
+         ↓
+   ┌─────┴─────┐
+   ↓           ↓
+Relevant     Insufficient
+Evidence      Evidence
+   ↓           ↓
+Grounded    Safe
+Answer      Abstention
+   ↓
+Source Citation
+```
 
-User Question
-      |
-      v
-Input Validation
-      |
-      v
-Security / Prompt-Injection Check
-      |
-      v
-Intent Detection
-      |
-      v
-Document Retrieval
-      |
-      v
-TF-IDF + Cosine Similarity
-      |
-      v
-Relevance Threshold
-      |
-      +----------------------+
-      |                      |
-      v                      v
-Relevant Sources        Insufficient Evidence
-      |                      |
-      v                      v
-Grounded Answer          Safe Abstention
-      |
-      v
-Source Citations
+### 🔐 Sensitive Action Flow
 
-Account-Access Workflow
+```text
+┌─────────────────────┐
+│   Access Request    │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ Authorization Check │
+└──────────┬──────────┘
+           ↓
+      ┌────┴────┐
+      ↓         ↓
+   Allowed    Denied
+      ↓         ↓
+      ↓      No Action
+      ↓
+┌─────────────────────┐
+│  Human Approval     │
+│     Required        │
+└──────────┬──────────┘
+           ↓
+      ┌────┴────┐
+      ↓         ↓
+  Approved    Rejected
+      ↓         ↓
+ Mock Tool   No Action
+      ↓
+ Action Result
+```
 
-Access Request
-      |
-      v
-Authorization Check
-      |
-      v
-Human Approval Required
-      |
-      +------------------+
-      |                  |
-    Approved           Rejected
-      |                  |
-      v                  v
- Mock Access Tool     No Action
-      |
-      v
-Action Result
+---
 
-Approved Knowledge Sources
+## 🧠 How It Works
 
-The agent currently uses these four synthetic documents:
+The agent follows a controlled pipeline:
 
-data/onboarding_guide.txt
+### 1️⃣ User Input
 
-data/security_policy.txt
+The employee enters a question through the CLI.
 
-data/support_escalation.txt
+### 2️⃣ Security Check
 
-data/product_faq.txt
+The input is inspected for unsafe or prompt-injection-style instructions.
 
-These documents are intentionally kept inside the repository so that the system can be run locally without depending on an external knowledge base.
+### 3️⃣ Intent Detection
 
-Technology Stack
+The system determines whether the request is a normal knowledge question or an action-related request.
 
-Python
+### 4️⃣ Document Retrieval
 
-scikit-learn
+The question is converted into a TF-IDF representation and compared with the approved documents using cosine similarity.
 
-TF-IDF Vectorization
+### 5️⃣ Relevance Evaluation
 
-Cosine Similarity
+Only sufficiently relevant information is used.
 
-Pytest
+If the evidence is weak, the agent can safely abstain.
 
-Optional Ollama integration
+### 6️⃣ Grounded Response
 
-Project Structure
+Relevant information is used to produce the final answer.
 
-AI_Onboarding_Agent.-main/
+### 7️⃣ Human-Controlled Actions
+
+If an account-access action is requested:
+
+**Role → Authorization → Human Approval → Mock Tool**
+
+No sensitive action happens automatically.
+
+---
+
+## 📚 Knowledge Base
+
+The project currently contains four approved synthetic documents:
+
+```text
+data/
+├── onboarding_guide.txt
+├── security_policy.txt
+├── support_escalation.txt
+└── product_faq.txt
+```
+
+These documents contain the controlled knowledge used by the agent.
+
+Keeping them inside the repository makes the project:
+
+* ✅ Reproducible
+* ✅ Easy to test
+* ✅ Local-first
+* ✅ Independent of external company systems
+* ✅ Suitable for demonstration
+
+---
+
+## 🛠️ Technology Stack
+
+<p align="center">
+
+| Technology               | Purpose                       |
+| ------------------------ | ----------------------------- |
+| 🐍 **Python**            | Core application              |
+| 🔎 **scikit-learn**      | Text processing and retrieval |
+| 📊 **TF-IDF**            | Document representation       |
+| 📐 **Cosine Similarity** | Relevance ranking             |
+| 🧪 **Pytest**            | Automated testing             |
+| 🦙 **Ollama**            | Optional local LLM generation |
+
+</p>
+
+---
+
+## 📂 Project Structure
+
+```text
+AI_Onboarding_Agent/
 │
-├── data/
+├── 📁 data/
 │   ├── onboarding_guide.txt
 │   ├── product_faq.txt
 │   ├── security_policy.txt
 │   └── support_escalation.txt
 │
-├── src/
+├── 📁 src/
 │   ├── agent.py
 │   ├── config.py
 │   ├── embeddings.py
@@ -150,178 +244,340 @@ AI_Onboarding_Agent.-main/
 │   ├── tools.py
 │   └── __init__.py
 │
-├── tests/
+├── 📁 tests/
 │   └── test_agent.py
 │
-├── main.py
-├── requirements.txt
-├── EXPLANATION.md
-├── PRESENTATION_CONTENT.md
-├── SAMPLE_RUNS.md
-└── README.md
+├── 🐍 main.py
+├── 📦 requirements.txt
+├── 📄 EXPLANATION.md
+├── 📄 PRESENTATION_CONTENT.md
+├── 📄 SAMPLE_RUNS.md
+└── 📖 README.md
+```
 
-Installation
+---
 
-1. Clone the repository
+# 🚀 Getting Started
 
+## 1. Clone the Repository
+
+```bash
 git clone <YOUR_GITHUB_REPOSITORY_URL>
-cd AI_Onboarding_Agent.-main
+cd AI_Onboarding_Agent
+```
 
-2. Create a virtual environment
+## 2. Create a Virtual Environment
 
+### Windows
+
+```bash
 python -m venv .venv
-
-3. Activate the environment
-
-Windows:
-
 .venv\Scripts\activate
+```
 
-Linux / macOS:
+### Linux / macOS
 
+```bash
+python -m venv .venv
 source .venv/bin/activate
+```
 
-4. Install dependencies
+## 3. Install Dependencies
 
+```bash
 pip install -r requirements.txt
+```
 
-Running the Agent
+---
 
-The default mode is deterministic and does not require an external LLM service.
+# ▶️ Run the Project
 
+## ⚡ Deterministic Local Mode
+
+The recommended mode does not require an external LLM service.
+
+```bash
 python main.py
+```
 
-You will see:
-
-AI EMPLOYEE ONBOARDING AGENT
-Approved sources only | Local-first | Human approval for actions
-Generation mode: deterministic
-
-The application then accepts questions interactively.
+The application starts an interactive onboarding assistant.
 
 Example:
 
+```text
+======================================================================
+AI EMPLOYEE ONBOARDING AGENT
+======================================================================
+Approved sources only | Local-first | Human approval for actions
+Generation mode: deterministic
+======================================================================
+
 Question (or 'exit'): What should I do if my laptop is lost?
 User role [employee]: employee
+```
 
-The agent displays:
+The agent then performs:
 
-Workflow trace
+```text
+Question
+   ↓
+Security Check
+   ↓
+Document Retrieval
+   ↓
+Relevance Check
+   ↓
+Grounded Answer
+   ↓
+Source Citation
+```
 
-Final response
+Type:
 
-Retrieved/source information
+```text
+exit
+```
 
-Approval prompt when an action is required
+to stop the application.
 
-Type exit to stop the application.
+---
 
-Optional Ollama Mode
+# 💬 Example Interactions
 
-The application also supports an optional Ollama-based generation mode:
+### 🔹 Example 1 — Knowledge Question
 
-python main.py --llm ollama
+**User:**
 
-This mode requires a working local Ollama installation and an available compatible model.
+```text
+What should I do if my laptop is lost?
+```
 
-If Ollama is not configured, use the default deterministic mode:
+**Agent:**
 
-python main.py
+```text
+Retrieves the relevant security document
+        ↓
+Checks relevance
+        ↓
+Generates grounded response
+        ↓
+Provides source information
+```
 
-Example Questions
+---
 
-Try questions related to the approved documents, such as:
+### 🔹 Example 2 — Support Question
 
-How do I report a lost laptop?
+**User:**
 
-What should I do if I cannot access my account?
-
+```text
 How can I contact support?
+```
 
-What is the process for onboarding?
+The agent searches the approved support documentation and returns the relevant information.
 
-The agent should provide grounded responses when sufficient information is available and abstain when the approved documents do not contain enough evidence.
+---
 
-Safety and Security
+### 🔹 Example 3 — Sensitive Access Request
 
-The project is designed around controlled AI behavior.
+**User:**
 
-Approved Sources Only
+```text
+I need access to an account.
+```
 
-The agent is restricted to the repository's approved synthetic documents for onboarding knowledge.
+The system does **not** immediately perform the action.
 
-Grounded Responses
+Instead:
 
-Retrieved passages are used as evidence for the final answer, and source citations are included where applicable.
+```text
+Access Request
+      ↓
+Role Check
+      ↓
+Authorization
+      ↓
+Human Approval
+      ↓
+Mock Access Tool
+      ↓
+Result
+```
 
+---
+
+### 🔹 Example 4 — Unsupported Question
+
+**User:**
+
+```text
+What will the weather be tomorrow?
+```
+
+If the approved knowledge base contains no relevant information, the agent should avoid inventing an answer.
+
+```text
+No Reliable Evidence
+        ↓
 Safe Abstention
+```
 
-If the retrieved information is not sufficiently relevant, the agent can refuse to provide an unsupported answer rather than inventing information.
+---
 
-Prompt-Injection Protection
+# 🔐 Security & Safety
 
-Retrieved document content is treated as reference material, not as instructions that can override the agent's system rules.
+Security is a core part of the project rather than an additional feature.
 
-Role Authorization
+### 🛡️ Approved Sources Only
 
-Actions that require elevated permissions are checked against the user's role.
+The agent uses the controlled knowledge base instead of unrestricted external information.
 
-Human-in-the-Loop Approval
+### 🚫 Prompt-Injection Protection
 
-Account-access actions require explicit approval from the user before execution.
+Retrieved documents are treated as **data**, not as instructions capable of overriding system behavior.
 
-Mock Tools
+### 🎯 Relevance Threshold
 
-The repository uses a mock access tool rather than performing real account changes.
+Low-relevance retrieval results can trigger a safe abstention.
 
-Testing
+### 🔑 Role-Based Authorization
 
-The repository contains automated tests under:
+Sensitive actions are checked against the user's role.
 
-tests/test_agent.py
+### 👤 Human-in-the-Loop
 
-Run them with:
+Privileged operations require explicit human approval.
 
+### 🧰 Mock Actions
+
+The access tool is intentionally mocked so the project can demonstrate the workflow without modifying real employee accounts.
+
+---
+
+# 🧪 Testing
+
+Run:
+
+```bash
 pytest
+```
 
-Current repository note: the existing test file is from an earlier interface/version of the project and currently requires alignment with the latest OnboardingAgent implementation. The core CLI flow itself has been verified to initialize, retrieve approved content, generate a grounded response, display the workflow trace, and handle the interactive flow.
+Tests are located in:
 
-Current Status
+```text
+tests/test_agent.py
+```
 
-Working
+> **Current status:** The existing test file was created against an earlier interface of the agent and needs to be aligned with the latest implementation. The core CLI workflow has been verified independently and successfully initializes, retrieves approved content, generates a grounded response, displays the workflow trace, and handles interactive input.
 
-Agent initialization
+---
 
-Local document loading
+# 📊 Project Status
 
-TF-IDF retrieval
+| Component                   |       Status       |
+| --------------------------- | :----------------: |
+| Project Initialization      |          ✅         |
+| Document Loading            |          ✅         |
+| TF-IDF Retrieval            |          ✅         |
+| Cosine Similarity           |          ✅         |
+| Grounded Responses          |          ✅         |
+| Source Citations            |          ✅         |
+| Security Checks             |          ✅         |
+| Prompt-Injection Protection |          ✅         |
+| Role Authorization          |          ✅         |
+| Human Approval              |          ✅         |
+| Mock Access Tool            |          ✅         |
+| Deterministic Mode          |          ✅         |
+| Ollama Mode                 |     🟡 Optional    |
+| Automated Tests             | 🟡 Needs Alignment |
+| Web Interface               |         🔜         |
+| Live Deployment             |         🔜         |
 
-Cosine-similarity ranking
+---
 
-Grounded response flow
+# 🖥️ Demo
 
-Source citation flow
+## Current Version
 
-Workflow trace
+The current version runs as a **Python CLI application**.
 
-Security checks
+A browser-based interface can be added for public deployment.
 
-Human approval workflow
+### 📸 Screenshots
 
-Mock action workflow
+> Add screenshots of the working application here after final testing.
 
-Deterministic local execution
+Example:
 
-To Be Improved Before Final Deployment
+```markdown
+![Agent Demo](assets/demo.png)
+```
 
-Align the automated tests with the current agent interface
+---
 
-Add a web interface for browser-based usage
+# 🛣️ Roadmap
 
-Deploy the application to a public hosting platform
+```text
+[x] Local onboarding agent
+[x] Approved document retrieval
+[x] TF-IDF similarity search
+[x] Grounded responses
+[x] Source citations
+[x] Security checks
+[x] Role-based authorization
+[x] Human approval workflow
+[x] Mock access tool
+[ ] Align automated tests
+[ ] Build browser-based UI
+[ ] Deploy live application
+[ ] Add screenshots
+[ ] Add live demo link
+```
 
-Add screenshots and a final live-demo URL to this README
+---
 
-Future Deployment
+# 🎓 What This Project Demonstrates
 
-The current version is a command-line application. For a browser-accessible submission, the agent can be wrapped in a lightweight web interface and deployed to a suitable hosting platform.
+### 🔎 Information Retrieval
+
+TF-IDF and cosine similarity are used to identify relevant onboarding information.
+
+### 🧠 Grounded AI
+
+Responses are generated using retrieved evidence instead of unrestricted knowledge.
+
+### 🛡️ AI Safety
+
+Prompt-injection protection and safe abstention reduce unsafe or unsupported behavior.
+
+### 🔐 Access Control
+
+Role-based authorization prevents unauthorized actions.
+
+### 👤 Human-in-the-Loop
+
+Sensitive actions require explicit human approval.
+
+### 💻 Local-First Architecture
+
+The project can operate locally without depending on external APIs.
+
+---
+
+# 🌐 Deployment
+
+The final version can be deployed as a browser-accessible application.
+
+---
+
+# 👩‍💻 Author
+
+### **Vaishnavi**
+
+<p align="center">
+  <strong>🔐 Grounded Answers • Controlled Actions • Human Oversight</strong>
+</p>
+
+<p align="center">
+  ⭐ If you find this project useful, consider giving the repository a star!
+</p>
