@@ -1,0 +1,13 @@
+# Security Policy
+
+## 1
+Company accounts must use multi-factor authentication. Employees must never share passwords, authentication codes, or recovery codes with another person.
+
+## 2
+If a company laptop or other company device is lost or stolen, report the incident to the IT Help Desk immediately and inform Security Operations. Do not attempt to recover the device yourself.
+
+## 3
+Suspicious email, phishing messages, or unexpected login prompts should be reported through the Internal Support Portal. Employees should not click suspicious links or provide credentials in response to unsolicited requests.
+
+## 4
+Employees must lock their workstation when leaving it unattended. Company information must only be stored in approved company systems.
