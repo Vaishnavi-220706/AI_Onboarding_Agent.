@@ -325,8 +325,3 @@ Add screenshots and a final live-demo URL to this README
 Future Deployment
 
 The current version is a command-line application. For a browser-accessible submission, the agent can be wrapped in a lightweight web interface and deployed to a suitable hosting platform.
-
-After deployment, this section can be updated with:
-
-Live Demo: <YOUR_LIVE_PROJECT_URL>
-GitHub:    <YOUR_GITHUB_REPOSITORY_URL>
