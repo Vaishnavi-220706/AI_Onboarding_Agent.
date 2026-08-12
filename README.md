@@ -255,7 +255,7 @@ AI_Onboarding_Agent/
 ## 1. Clone the Repository
 
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL>
+git clone https://github.com/Vaishnavi-220706/AI_Onboarding_Agent.git
 cd AI_Onboarding_Agent
 ```
 
