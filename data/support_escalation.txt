@@ -1,0 +1,13 @@
+# Support Escalation Guide
+
+## 1
+For normal technical issues, create a ticket in the Internal Support Portal. Include a short description, affected system, time of occurrence, and relevant error message.
+
+## 2
+Security incidents, lost devices, suspected account compromise, and phishing reports should be marked as security-related and escalated to Security Operations immediately.
+
+## 3
+If a support ticket remains blocked after the initial support response, the employee may ask their manager to escalate the ticket. Critical business-impacting incidents should be escalated as soon as they are identified.
+
+## 4
+The Internal Support Portal is the approved channel for technical support and onboarding blockers.
