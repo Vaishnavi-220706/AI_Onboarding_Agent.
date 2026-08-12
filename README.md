@@ -5,13 +5,6 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white">
-  <img src="https://img.shields.io/badge/AI-Grounded%20Retrieval-7C3AED?style=for-the-badge">
-  <img src="https://img.shields.io/badge/Retrieval-TF--IDF-orange?style=for-the-badge">
-  <img src="https://img.shields.io/badge/Security-Human%20in%20the%20Loop-2EA44F?style=for-the-badge">
-</p>
-
-<p align="center">
   <em>Answer employee questions from approved company knowledge — without hallucinating policies or performing sensitive actions automatically.</em>
 </p>
 
