@@ -1,0 +1,17 @@
+IT Support and Escalation
+
+IT Help Desk
+
+Employees can contact the IT Help Desk for technical problems involving company systems.
+
+Hardware Problems
+
+Hardware problems should be reported to the IT Help Desk.
+
+Critical Incidents
+
+Critical system incidents should be escalated to the IT support team immediately.
+
+Escalation
+
+If a problem cannot be resolved by the Help Desk, it should be escalated to the appropriate technical team.

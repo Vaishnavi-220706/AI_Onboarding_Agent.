@@ -1,0 +1,19 @@
+Security Policy
+
+Authentication
+
+All employees must enable multi-factor authentication (MFA) before accessing internal company systems.
+
+MFA adds an additional authentication factor and is mandatory for internal system access.
+
+Password Security
+
+Employees must use strong passwords and must not share passwords with other employees.
+
+Access Control
+
+Employees should only receive access to systems required for their job responsibilities.
+
+Security Incidents
+
+Security incidents should be reported to the IT Help Desk immediately.

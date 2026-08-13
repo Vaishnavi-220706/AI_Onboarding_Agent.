@@ -1,0 +1,17 @@
+Product FAQ
+
+Analytics Dashboard
+
+The Analytics Dashboard provides employees with access to organizational analytics.
+
+Dashboard Access
+
+Analytics Dashboard access must be requested through the appropriate access-management process.
+
+Permissions
+
+Access permissions are provided according to the employee's role and responsibilities.
+
+Product Support
+
+Questions about the Analytics Dashboard can be directed to the appropriate support team.
